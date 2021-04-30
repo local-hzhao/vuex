@@ -27,12 +27,27 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    filterList: state => state.list.filter(item => item > 5)
+    filterList: state => state.list.filter(item => item > 5),
+    // 通过辅助函数向外提供一个password属性
+    password: state => state.bb.password
   },
+  // 这个是vuex模块化
   modules: {
-    // filter: function (state) {
-    //   return state.list.filter(item => item > 5)
-    // }
-    // filter: state => state.list.filter(item => item > 5)
+    aa: {
+      namespaced: true,
+      state: {
+        token: 'modules'
+      },
+      mutations: {
+        upload (state) {
+          state.token = 'username'
+        }
+      }
+    },
+    bb: {
+      state: {
+        password: 123456
+      }
+    }
   }
 })
